@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shadow_gradient"
+    android:elevation="10dp">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/main_text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_time_hint"
+        style="@style/TextViewTimeStyle"
+        android:layout_marginStart="@dimen/tv_time_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_50"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_50"/>
+
+
+    <TextView
+        android:id="@+id/blood_pressure_first_value"
+        android:text="@string/blood_pressure_first_value_hint"
+        android:layout_marginEnd="20dp"
+        style="@style/TextViewBloodPressure"
+        android:layout_margin="@dimen/tv_time_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/delimeter"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_50"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_50"/>
+
+    <TextView
+        android:id="@+id/delimeter"
+        android:text="@string/blood_pressure_delimeter"
+        style="@style/TextViewBloodPressureDelimeter"
+        android:layout_margin="@dimen/tv_time_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideline_vertical_50"
+        app:layout_constraintEnd_toEndOf="@id/guideline_vertical_50"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_50"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_50"
+        />
+
+    <TextView
+        android:id="@+id/blood_pressure_second_value"
+        android:text="@string/blood_pressure_second_value_hint"
+        style="@style/TextViewBloodPressure"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/delimeter"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_50"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_50"
+        />
+
+    <TextView
+        android:id="@+id/pulse"
+        android:text="@string/pulse_hint"
+        android:layout_marginEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextViewPulse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_50"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_50"
+        android:drawablePadding="10dp"
+        app:drawableLeftCompat="@drawable/ic_fab_heart"
+        app:drawableTint="@color/main_text_color" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_50"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_50"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/main_text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

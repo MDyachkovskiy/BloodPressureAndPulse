@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextViewDateStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+
+    <style name="TextViewTimeStyle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+
+    <style name="TextViewBloodPressure">
+        <item name="android:textSize">27sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextViewBloodPressureDelimeter">
+        <item name="android:textSize">27sp</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+
+    <style name="TextViewPulse">
+        <item name="android:textSize">27sp</item>
+        <item name="android:textColor">@color/main_text_color</item>
+    </style>
+
+</resources>
