@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import gb.com.bloodpressureandpulse.databinding.FragmentHealthParameterBinding
 
 
-class HealthParameterFragment : Fragment() {
+class HealthMetricsFragment : Fragment() {
 
     private var _binding: FragmentHealthParameterBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        fun newInstance() = HealthParameterFragment()
+        fun newInstance() = HealthMetricsFragment()
     }
 
     override fun onCreateView(
