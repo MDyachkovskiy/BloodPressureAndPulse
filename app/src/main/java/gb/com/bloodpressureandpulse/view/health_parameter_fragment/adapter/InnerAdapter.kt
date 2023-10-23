@@ -15,7 +15,8 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.ViewHolder>() {
     private val data = mutableListOf<VitalSigns>()
     fun setData(newData: List<VitalSigns>) {
         data.clear()
-        data.addAll(newData)
+        val sortedData = newData.sortedBy { it.date }
+        data.addAll(sortedData)
         notifyDataSetChanged()
     }
 
