@@ -13,13 +13,31 @@ import java.util.Locale
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private val data = mutableListOf<VitalSigns>()
-    private val groupedData: Map<Date?, List<VitalSigns>>
-        get() = data.groupBy { it.date }
+    private val dates = mutableListOf<Date>()
+    private var groupedData = mutableMapOf<Date?, List<VitalSigns>>()
+
 
     fun setData(newData: List<VitalSigns>) {
         data.clear()
         data.addAll(newData)
+
+        groupedData.clear()
+        groupedData.putAll(data.groupBy {
+            truncateDate(it.date) })
+
+        dates.clear()
+        dates.addAll(groupedData.keys.filterNotNull().sortedBy { it.time })
+
         notifyDataSetChanged()
+    }
+
+    private fun truncateDate(date: Date?): Date? {
+        date?.let {
+            val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dateStr = format.format(it)
+            return format.parse(dateStr)
+        }
+        return null
     }
 
     inner class ViewHolder(
@@ -45,14 +63,11 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         return ViewHolder(binding)
     }
 
-    override fun getItemCount() = groupedData.size
+    override fun getItemCount() = dates.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val date = groupedData.keys.toList()[position]
-        groupedData[date]?.let {
-            if (date != null) {
-                holder.bind(date, it)
-            }
-        }
+        val date = dates[position]
+        val items = groupedData[date] ?: emptyList()
+        holder.bind(date, items)
     }
 }

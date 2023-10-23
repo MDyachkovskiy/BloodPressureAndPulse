@@ -11,7 +11,6 @@ import java.util.Locale
 class InnerAdapter : RecyclerView.Adapter<InnerAdapter.ViewHolder>() {
 
     private val data = mutableListOf<VitalSigns>()
-
     fun setData(newData: List<VitalSigns>) {
         data.clear()
         data.addAll(newData)
@@ -23,7 +22,9 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.ViewHolder>() {
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: VitalSigns) {
             with(binding) {
-                tvTime.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(data.date)
+                tvTime.text = data.date?.let {
+                    SimpleDateFormat("HH:mm", Locale.getDefault()).format(it)
+                }
                 bloodPressureFirstValue.text = data.systolicPressure.toString()
                 bloodPressureSecondValue.text = data.diastolicPressure.toString()
                 pulse.text = data.pulse.toString()
