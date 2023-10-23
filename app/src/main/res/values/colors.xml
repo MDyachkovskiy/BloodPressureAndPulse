@@ -3,4 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="FAB_color">#CC0000</color>
+    <color name="main_text_color">#858585</color>
+    <color name="tv_date_background">#F1F1F1</color>
+
+    <color name="good_vital_background">#B9E7B9</color>
+    <color name="wary_vital_background">#E6F0B1</color>
+    <color name="alert_vital_background">#FAE9B1</color>
+
 </resources>

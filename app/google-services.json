@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "351025109420",
+    "project_id": "vitalsignsapp-181f2",
+    "storage_bucket": "vitalsignsapp-181f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351025109420:android:5f30a00e3f05f66b534209",
+        "android_client_info": {
+          "package_name": "gb.com.bloodpressureandpulse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrjN3qJ2W7qLaVbPl-1n_P3TCCROmkASk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
