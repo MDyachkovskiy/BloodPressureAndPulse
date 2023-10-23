@@ -12,13 +12,20 @@ class HealthMetricsViewModel(
     private val repository: HealthMetricsRepository
 ) : ViewModel() {
 
-    private val _healthMetricsLiveData: MutableLiveData<VitalSigns> = MutableLiveData()
-    val healthMetricsLiveData: LiveData<VitalSigns> get() = _healthMetricsLiveData
+    private val _healthMetricsLiveData: MutableLiveData<List<VitalSigns>> = MutableLiveData()
+    val healthMetricsLiveData: LiveData<List<VitalSigns>> get() = _healthMetricsLiveData
 
     fun getVitalSigns() {
         viewModelScope.launch {
-            val vitalSigns = repository.getVitalSigns()
-            _healthMetricsLiveData.postValue(vitalSigns)
+            repository.getVitalSigns()
+            _healthMetricsLiveData.postValue(repository.vitalSignsList)
+        }
+    }
+
+    fun fetchAllVitalSigns() {
+        viewModelScope.launch {
+            val allVitalSigns= repository.getAllVitalSigns()
+            _healthMetricsLiveData.postValue(allVitalSigns)
         }
     }
 }

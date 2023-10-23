@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import gb.com.bloodpressureandpulse.databinding.FragmentHealthParameterBinding
 import gb.com.bloodpressureandpulse.model.domain.VitalSigns
+import gb.com.bloodpressureandpulse.view.health_parameter_fragment.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-
 
 class HealthMetricsFragment : Fragment() {
 
@@ -17,6 +17,7 @@ class HealthMetricsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HealthMetricsViewModel by viewModel()
+    private val mainAdapter = MainAdapter()
 
     companion object {
         fun newInstance() = HealthMetricsFragment()
@@ -26,10 +27,10 @@ class HealthMetricsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentHealthParameterBinding.inflate(inflater, container, false)
         initObservers()
         handleFabButton()
+        viewModel.fetchAllVitalSigns()
         return binding.root
     }
 
@@ -39,8 +40,12 @@ class HealthMetricsFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView(vitalSigns: VitalSigns) {
-
+    private fun initRecyclerView(vitalSigns: List<VitalSigns>) {
+        with(binding) {
+            mainAdapter.setData(vitalSigns)
+            healthParameterRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            healthParameterRecyclerView.adapter = mainAdapter
+        }
     }
 
     private fun handleFabButton() {
