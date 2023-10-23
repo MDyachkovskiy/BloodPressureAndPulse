@@ -13,7 +13,7 @@ import java.util.Locale
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     private val data = mutableListOf<VitalSigns>()
-    private val groupedData: Map<Date, List<VitalSigns>>
+    private val groupedData: Map<Date?, List<VitalSigns>>
         get() = data.groupBy { it.date }
 
     fun setData(newData: List<VitalSigns>) {
@@ -49,6 +49,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val date = groupedData.keys.toList()[position]
-        groupedData[date]?.let { holder.bind(date, it) }
+        groupedData[date]?.let {
+            if (date != null) {
+                holder.bind(date, it)
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ import gb.com.bloodpressureandpulse.di.appModule
 import gb.com.bloodpressureandpulse.di.firebaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
 
 class App : Application() {
 
@@ -13,7 +12,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            module { listOf(appModule, firebaseModule) }
+            modules(listOf(appModule, firebaseModule))
         }
     }
 }

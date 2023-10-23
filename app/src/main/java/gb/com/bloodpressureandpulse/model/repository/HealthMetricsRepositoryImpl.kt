@@ -1,6 +1,6 @@
 package gb.com.bloodpressureandpulse.model.repository
 
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import gb.com.bloodpressureandpulse.model.datasource.VitalSignsGenerator
 import gb.com.bloodpressureandpulse.model.domain.VitalSigns
 import kotlinx.coroutines.Dispatchers
@@ -8,24 +8,24 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class HealthMetricsRepositoryImpl(
-    firebaseDatabase: FirebaseDatabase,
+    firestore: FirebaseFirestore,
     private val generator: VitalSignsGenerator
 ) : HealthMetricsRepository {
 
-    private val ref = firebaseDatabase.getReference("vitalSigns")
+    private val collection = firestore.collection("vitalSigns")
     override val vitalSignsList: MutableList<VitalSigns> = mutableListOf()
     override fun getVitalSigns(): VitalSigns {
         val newVitalSigns = generator.generateVitalSigns()
-        ref.push().setValue(newVitalSigns)
+        collection.add(newVitalSigns)
         vitalSignsList.add(newVitalSigns)
         return newVitalSigns
     }
 
     override suspend fun getAllVitalSigns(): List<VitalSigns> {
         return withContext(Dispatchers.IO) {
-            val dataShapshot = ref.get().await()
-            val list = dataShapshot.children.mapNotNull {
-                it.getValue(VitalSigns::class.java)
+            val dataShapshot = collection.get().await()
+            val list = dataShapshot.documents.mapNotNull {
+                it.toObject(VitalSigns::class.java)
             }
             vitalSignsList.clear()
             vitalSignsList.addAll(list)

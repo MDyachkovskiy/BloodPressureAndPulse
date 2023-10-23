@@ -3,8 +3,8 @@ package gb.com.bloodpressureandpulse.model.domain
 import java.util.Date
 
 data class VitalSigns(
-    val systolicPressure: Int,
-    val diastolicPressure: Int,
-    val pulse: Int,
-    val date: Date
+    var systolicPressure: Int = 0,
+    var diastolicPressure: Int = 0,
+    var pulse: Int = 0,
+    var date: Date? = null
 )
