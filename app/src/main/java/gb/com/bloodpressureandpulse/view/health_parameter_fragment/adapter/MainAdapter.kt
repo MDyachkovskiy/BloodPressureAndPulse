@@ -2,6 +2,7 @@ package gb.com.bloodpressureandpulse.view.health_parameter_fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import gb.com.bloodpressureandpulse.databinding.ItemDayBinding
@@ -25,10 +26,14 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         groupedData.putAll(data.groupBy {
             truncateDate(it.date) })
 
-        dates.clear()
-        dates.addAll(groupedData.keys.filterNotNull().sortedBy { it.time })
+        val newDates = groupedData.keys.filterNotNull().toList()
+        val diffCallback = MainDiffUtilCallback(dates, newDates)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
 
-        notifyDataSetChanged()
+        dates.clear()
+        dates.addAll(newDates)
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     private fun truncateDate(date: Date?): Date? {
@@ -55,6 +60,23 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             binding.tvDate.text = SimpleDateFormat("dd MMMM", Locale.getDefault())
                 .format(date)
             innerAdapter.setData(items)
+        }
+    }
+
+    private class MainDiffUtilCallback(
+        private val oldList: List<Date>,
+        private val newList: List<Date>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
         }
     }
 

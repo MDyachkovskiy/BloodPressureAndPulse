@@ -3,6 +3,7 @@ package gb.com.bloodpressureandpulse.view.health_parameter_fragment.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import gb.com.bloodpressureandpulse.R
 import gb.com.bloodpressureandpulse.databinding.ItemBloodPressurePulseBinding
@@ -14,10 +15,15 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.ViewHolder>() {
 
     private val data = mutableListOf<VitalSigns>()
     fun setData(newData: List<VitalSigns>) {
-        data.clear()
         val sortedData = newData.sortedBy { it.date }
+
+        val diffCallback = InnerDiffUtilCallback(data, sortedData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        data.clear()
         data.addAll(sortedData)
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     inner class ViewHolder(
@@ -52,6 +58,24 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.ViewHolder>() {
                 }
             }
         }
+    }
+
+    private class InnerDiffUtilCallback(
+        private val oldList: List<VitalSigns>,
+        private val newList: List<VitalSigns>
+        ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].date == newList[newItemPosition].date
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
