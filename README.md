@@ -9,7 +9,7 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://i.ibb.co.com/dp2jNSp/IMG-20231023-152105.jpg" alt="project-screenshot" width="200" height="400/">
+<img src="https://gdurl.com/ypF7" alt="project-screenshot" width="200" height="400/">
 
 
 <h2>💻 Built with</h2>
